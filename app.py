@@ -148,7 +148,7 @@ def updatel(id):
 @app.route('/proMovement' , methods=['POST' , 'GET'])
 def proMovement():
     if request.method == 'POST':
-        new_proMovement = ProductMovement(from_location= request.form['from'] , to_location=request.form['to'] ,qty=request.form['pro_id'] ,product_id=request.form['pro_id']  )
+        new_proMovement = ProductMovement(from_location= request.form['from'] , to_location=request.form['to'] ,qty=request.form['pro_qty'] ,product_id=request.form['pro_id']  )
             #push the new Product-Movement obj to the database 
         try:
           db.session.add(new_proMovement)
@@ -161,7 +161,37 @@ def proMovement():
         productsmove = ProductMovement.query.all()
         return render_template('productMovement.html' , productsmove = productsmove)
 
-    
+
+@app.route('/updateMovement/<int:id>', methods=['GET', 'POST'])
+def updateMovement(id):
+    update_Move = ProductMovement.query.get_or_404(id)
+
+    if request.method == 'POST':
+        update_Move.from_location = request.form['from']
+        update_Move.to_location=request.form['to']
+        update_Move.qty=request.form['pro_id']
+        update_Move.product_id=request.form['pro_id']
+
+        try:
+            db.session.commit()
+            return redirect('/proMovement')
+        except:
+            return 'There was an issue updating your Movement'
+
+    else:
+        return render_template('update_Movement.html', productm =  update_Move)
+
+# @app.route('/deleteM')
+# def deleteM():
+#     id='3'
+#     del_location = ProductMovement.query.get_or_404(id)
+
+#     try:
+#         db.session.delete(del_location)
+#         db.session.commit()
+#         return redirect('/proMovement')
+#     except:
+#         return 'There was a problem deleting that location'
 
 if __name__ == '__main__':
     app.run(debug=True)

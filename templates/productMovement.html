@@ -33,9 +33,9 @@
             <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">{{productm.product_id}}</td>
             <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">{{productm.qty}}</td>
             <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">
-                <a href="">Update</a>
-                <br>
-                <a href="/deleteM">Delete</a>
+                <a href="/updateMovement/{{productm.id}}">Update</a>
+                <!-- <br>
+                <a href="/deleteM">Delete</a> -->
             </td>
         </tr>
         {% endfor%}
@@ -47,7 +47,7 @@
         <input type="text" name="from" id="from" placeholder="fromLocation.." style="width: 70%;"><br><br>
         <input type="text" name="to" id="to" placeholder="ToLocation..." style="width: 70%;"><br><br>
         <input type="text" name="pro_qty" placeholder="Product Qty..." id="pro_qty" style="width: 70%;"><br><br>
-        <input type="text" name="pro_id" placeholder="ProductName" id="pro_id" style="width: 70%;">
+        <input type="text" name="pro_id" placeholder="ProductId..." id="pro_id" style="width: 70%;">
         
         <br><br>
         <input type="submit" value="Add proMovement">

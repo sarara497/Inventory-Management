@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+
+<title>Inventory Managment</title>
+
+{% endblock%}
+
+{% block body %}
+<div class='div_content' style="width:600px; margin: 0 auto;">
+    <br>
+    
+    <h1 style="text-align: center"> Update Product-Movement </h1>
+    <br>
+    <div class="form" style=" margin-top: 20px;">
+    <form action='/updateMovement/{{productm.id}}' method="POST">
+        <input type="text" name="from" id="from" value="{{productm.from_location}}"  style="width: 70%;"><br><br>
+        <input type="text" name="to" id="to"  value="{{productm.to_location}}" style="width: 70%;"><br><br>
+        <input type="text" name="pro_qty" value="{{productm.product_id}}"   id="pro_qty" style="width: 70%;"><br><br>
+        <input type="text" name="pro_id"  value="{{productm.qty}}" id="pro_id" style="width: 70%;">
+        <input type="submit" value="UpDate">
+
+    </form>
+    <br>
+    <form action='/proMovement' >
+        <input type="submit" value="Back">
+    </form>
+</div>
+
+</div>
+{% endblock%}
