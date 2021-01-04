@@ -82,7 +82,7 @@ def update(id):
     else:
         return render_template('update.html', product = update_pro)
 
-    
+    #here we addd the small comment 
 
 if __name__ == '__main__':
     app.run(debug=True)
