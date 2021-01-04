@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+
+<title>Inventory Managment</title>
+
+{% endblock%}
+
+{% block body %}
+<div class='div_content' style="width:600px; margin: 0 auto;">
+    <br>
+    <h1 style="text-align: center">Product-Movement Table </h1>
+    {% if productsmove|length < 1 %}
+    <h4 style="text-align: center">There are no Products-Movement ! Add One. </h4>
+    {% else %}
+    <table style="border: 1px solid #aaa; border-collapse: collapse; width: 100%;">
+        <tr>
+            <th  style="border: 1px solid #aaa; height: 30px;">Move-id</th>
+            <th  style="border: 1px solid #aaa; height: 30px;">Time</th>
+            <th  style="border: 1px solid #aaa; height: 30px;">From</th>
+            <th  style="border: 1px solid #aaa; height: 30px;">To</th>
+            <th  style="border: 1px solid #aaa; height: 30px;">Product-id</th>
+            <th  style="border: 1px solid #aaa; height: 30px;">Qty</th>
+            <th  style="border: 1px solid #aaa; height: 30px;">Actions</th>
+        </tr>
+        {% for productm in productsmove %}
+        <tr>
+            <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">{{productm.id}}</td>
+            <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">{{productm.timestamp.date()}}</td>
+            <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">{{productm.from_location}}</td>
+            <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">{{productm.to_location}}</td>
+            <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">{{productm.product_id}}</td>
+            <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">{{productm.qty}}</td>
+            <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">
+                <a href="">Update</a>
+                <br>
+                <a href="/deleteM">Delete</a>
+            </td>
+        </tr>
+        {% endfor%}
+    </table>
+    {% endif %}
+    <br>
+    <div class="form" style=" margin-top: 20px;">
+    <form action='/proMovement' method="POST">
+        <input type="text" name="from" id="from" placeholder="fromLocation.." style="width: 70%;"><br><br>
+        <input type="text" name="to" id="to" placeholder="ToLocation..." style="width: 70%;"><br><br>
+        <input type="text" name="pro_qty" placeholder="Product Qty..." id="pro_qty" style="width: 70%;"><br><br>
+        <input type="text" name="pro_id" placeholder="ProductName" id="pro_id" style="width: 70%;">
+        
+        <br><br>
+        <input type="submit" value="Add proMovement">
+
+    </form>
+    <br>
+    <form action="/" >
+        <input type="submit" value="Back">
+    </form>
+</div>
+
+</div>
+{% endblock%}

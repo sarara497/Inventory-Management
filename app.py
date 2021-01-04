@@ -20,7 +20,7 @@ class Location(db.Model):
 
 
 class ProductMovement(db.Model):
-    move_id=db.Column(db.String(200) , primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     timestamp=db.Column(db.DateTime , default=datetime.utcnow)
    
     from_location=db.Column( db.String(200), db.ForeignKey(Location.loc_id),nullable=True)
@@ -33,7 +33,7 @@ class ProductMovement(db.Model):
     product = db.relationship('Product', backref=db.backref('ProductMovement', lazy=True))
 
     def pro_Movement (self):
-        return '<P_Movement %r>' % self.move_id
+        return '<P_Movement %r>' % self.id
 
 #Home Page
 @app.route('/')
@@ -72,7 +72,7 @@ def delete(id):
         db.session.commit()
         return redirect('/product')
     except:
-        return 'There was a problem deleting that Product'
+        return 'There was a problem deleting th at Product'
 
 @app.route('/update/<string:id>', methods=['GET', 'POST'])
 def update(id):
@@ -143,6 +143,23 @@ def updatel(id):
     else:
         return render_template('update_loc.html', location = update_loc)
 
+
+#Product-Movement Page
+@app.route('/proMovement' , methods=['POST' , 'GET'])
+def proMovement():
+    if request.method == 'POST':
+        new_proMovement = ProductMovement(from_location= request.form['from'] , to_location=request.form['to'] ,qty=request.form['pro_id'] ,product_id=request.form['pro_id']  )
+            #push the new Product-Movement obj to the database 
+        try:
+          db.session.add(new_proMovement)
+          db.session.commit()
+          return redirect('/proMovement')
+        except:
+              return 'there was a problem in your added'
+    else:
+        #return all the Product-Movements
+        productsmove = ProductMovement.query.all()
+        return render_template('productMovement.html' , productsmove = productsmove)
 
     
 
