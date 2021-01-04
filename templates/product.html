@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+
+<title>Inventory Managment</title>
+
+{% endblock%}
+
+{% block body %}
+<div class='div_content' style="width:400px; margin: 0 auto;">
+    <br>
+    <h1 style="text-align: center">Product Table </h1>
+    {% if products|length < 1 %}
+    <h4 style="text-align: center">There are no Products ! Add One. </h4>
+    {% else %}
+    <table style="border: 1px solid #aaa; border-collapse: collapse; width: 100%;">
+        <tr>
+            <th  style="border: 1px solid #aaa; height: 30px;">Product</th>
+            <th  style="border: 1px solid #aaa; height: 30px;">Actions</th>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">{{product.prod_id}}</td>
+            <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">
+                <a href="/update/{{product.prod_id}}">Update</a>
+                <br>
+                <a href="/delete/{{product.prod_id}}">Delete</a>
+            </td>
+        </tr>
+        {% endfor%}
+    </table>
+    {% endif %}
+    <br>
+    <div class="form" style=" margin-top: 20px;">
+    <form action='/product' method="POST">
+        <input type="text" name="product" id="product" style="width: 70%;">
+        <input type="submit" value="Add Product">
+
+    </form>
+    <br>
+    <form action="/" >
+        <input type="submit" value="Back">
+    </form>
+</div>
+
+</div>
+{% endblock%}
