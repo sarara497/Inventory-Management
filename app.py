@@ -15,8 +15,6 @@ class Product(db.Model):
 
 class Location(db.Model):
     loc_id=db.Column(db.String(200) , primary_key=True)
-    ProductMovement = db.relationship("ProductMovement", backref="Location", lazy = "dynamic")
-    
     def loca_id (self):
         return '<L_ocation %r>' % self.loc_id
 
@@ -24,8 +22,12 @@ class Location(db.Model):
 class ProductMovement(db.Model):
     move_id=db.Column(db.String(200) , primary_key=True)
     timestamp=db.Column(db.DateTime , default=datetime.utcnow)
+   
     from_location=db.Column( db.String(200), db.ForeignKey(Location.loc_id),nullable=True)
-    #to_location=db.Column( db.String(200), db.ForeignKey(Location.loc_id),nullable=True)
+    to_location=db.Column( db.String(200), db.ForeignKey(Location.loc_id),nullable=True)
+    locationf = db.relationship("Location" , foreign_keys=[from_location])
+    locationt = db.relationship("Location" , foreign_keys=[to_location])
+   
     qty=db.Column(db.Integer , nullable=False)
     product_id=db.Column(db.String(200), db.ForeignKey('product.prod_id'),nullable=False)
     product = db.relationship('Product', backref=db.backref('ProductMovement', lazy=True))
