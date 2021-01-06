@@ -1,9 +1,10 @@
-from flask import Flask, render_template , url_for, request , redirect
+from flask import Flask, render_template , request , redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///test.db'
+
 db=SQLAlchemy(app)
 
 class Product(db.Model):
@@ -21,7 +22,7 @@ class Location(db.Model):
 
 class ProductMovement(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    timestamp=db.Column(db.DateTime , default=datetime.utcnow)
+    timestamp=db.Column(db.DateTime , default=datetime.utcnow.__format__)
    
     from_location=db.Column( db.String(200), db.ForeignKey(Location.loc_id),nullable=True)
     to_location=db.Column( db.String(200), db.ForeignKey(Location.loc_id),nullable=True)
@@ -59,7 +60,7 @@ def product():
             return 'You should fill the input '
     else:
         #return all the products
-        products = Product.query.all()
+        products = Product.query.all() 
 
         return render_template('product.html' , products = products)
 
@@ -183,7 +184,7 @@ def updateMovement(id):
 
 # @app.route('/deleteM')
 # def deleteM():
-#     id='3'
+#     id='7'
 #     del_location = ProductMovement.query.get_or_404(id)
 
 #     try:
@@ -192,6 +193,51 @@ def updateMovement(id):
 #         return redirect('/proMovement')
 #     except:
 #         return 'There was a problem deleting that location'
+
+
+
+#Product Balance
+@app.route('/ProductBalance', methods=['POST' , 'GET'])
+def ProductB():
+    if request.method == 'POST':
+      prodMov =ProductMovement.query.order_by(ProductMovement.timestamp.desc()).all()
+      loc = Location.query.all()
+      result={}
+      
+      for y in loc:
+           myarray=[] 
+           for x in prodMov:
+             #print('pro ->>>>' , x.to_location , x.product_id , x.qty)
+             if y.loc_id == x.to_location:
+                 result[x.to_location]=myarray
+                 v={'product':x.product_id , 'Location':x.to_location , "Qty":x.qty}
+                 myarray.append(v)
+                
+      print("v = " ,result)
+    #   finalResult={}
+    #   for y in loc:
+    #       mynewarray=[]
+    #       for x , z in result.items():
+    #           finalResult[x]=mynewarray
+    #           print("x= ",x , "y" ,z)
+    #           value=z[0]['product']
+    #           if y.loc_id == x:
+                  
+    #               for i in range(len(z)):
+                      
+    #                   if z[i]['product'] == value:
+    #                       mynewarray.append(z[i])
+                      
+    #       print("the final = " , finalResult)         
+
+      return render_template('balancePro.html' , balanc = result)
+
+    else :
+        return 'There was a problem '
+
+
+
+   
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+
+<title>Inventory Managment</title>
+
+{% endblock%}
+
+{% block body %}
+<div class='div_content' style="width:400px; margin: 0 auto;">
+    <br>
+    <h1 style="text-align: center">Product Balance Table </h1>
+    {% if balanc|length < 1 %}
+    <h4 style="text-align: center">There are no Products !{{ balance }}  </h4>
+     
+    {% else %}
+    <table style="border: 1px solid #aaa; border-collapse: collapse; width: 100%;">
+        <tr>
+            <th  style="border: 1px solid #aaa; height: 30px;">Product</th>
+            <th  style="border: 1px solid #aaa; height: 30px;">Warehouse</th>
+            <th  style="border: 1px solid #aaa; height: 30px;">Qty</th>
+        </tr>
+        {% for balance in balanc.values() %}
+           <!-- <h6> p {{ balance[0]['product']}}</h6> -->
+           {% for i in balance%}
+              <!-- <h6> p {{ i['product']}}</h6> -->
+              <tr>
+                <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">{{ i['product']}}</td>
+                <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">{{ i['Location']}}</td>
+                <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">{{ i['Qty']}}</td>
+              </tr>
+           {% endfor%}
+        {% endfor%}
+    </table>
+    {% endif %}
+    <br>
+
+    <br>
+    <form action="/" >
+        <input type="submit" value="Back">
+    </form>
+
+</div>
+{% endblock%}

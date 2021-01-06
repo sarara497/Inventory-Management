@@ -12,7 +12,8 @@
     <br>
     <h1 style="text-align: center">Product Table </h1>
     {% if products|length < 1 %}
-    <h4 style="text-align: center">There are no Products ! Add One. </h4>
+    <h4 style="text-align: center">There are no Products ! Add One.   </h4>
+     
     {% else %}
     <table style="border: 1px solid #aaa; border-collapse: collapse; width: 100%;">
         <tr>
@@ -20,6 +21,7 @@
             <th  style="border: 1px solid #aaa; height: 30px;">Actions</th>
         </tr>
         {% for product in products %}
+        <!-- <h6>{{ product.prod_id }}</h6> -->
         <tr>
             <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">{{product.prod_id}}</td>
             <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">
