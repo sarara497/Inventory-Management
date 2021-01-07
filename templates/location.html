@@ -8,21 +8,30 @@
 {% endblock%}
 
 {% block body %}
-<div class='div_content' style="width:600px; margin: 0 auto;">
-    <br>
-    <h1 style="text-align: center">Locations Table </h1>
+<div class='div_content' style="width:600px; margin: 0 auto; display: flex; flex-direction: column;">
+    <div class="form" style=" margin-top: 30px; text-align: center;">
+        <form action='/location' method="POST" style=" display: flex; flex-direction: row;">
+            <input type="text" name="location" id="location" style=" margin-left: 10px; width: 90%; margin-bottom: 17px; height: 40px;border: double; font-weight: 600; font-size: large; color: blue; border-block-color: revert; margin-right: 10px;">
+            <input type="submit" value="Add Location" style=" font-size: 25px; background-color: #828ede; border: double; color: floralwhite; width:40%; height: 45px; margin-right: 10px;">
+            
+        </form>
+        <form action="/" >
+            <input type="submit" value="Back" style="margin-bottom: 40px; font-size: 25px; background-color: #828ede; border: double; color: floralwhite; width:40%; height: 45px;">
+        </form>
+    </div>
+    <h1 style="text-align: center ; color: cornsilk; font-size:xx-large; margin-top: -10px;">Locations Table </h1>
     {% if locations|length < 1 %}
-    <h4 style="text-align: center">There are no Locations ! Add One. </h4>
+    <h4 style="text-align: center ; color: cornsilk; font-size:x-large; margin-top: -10px;">There are no Locations ! Add One. </h4>
     {% else %}
     <table style="border: 1px solid #aaa; border-collapse: collapse; width: 100%;">
         <tr>
-            <th  style="border: 1px solid #aaa; height: 30px;">Location</th>
-            <th  style="border: 1px solid #aaa; height: 30px;">Actions</th>
+            <th style="border: 1px solid #aaa; height: 30px; color: cornsilk; font-size:x-large;">Location</th>
+            <th style="border: 1px solid #aaa; height: 30px; color: cornsilk; font-size:x-large;">Actions</th>
         </tr>
         {% for location in locations %}
         <tr>
-            <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">{{location.loc_id}}</td>
-            <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">
+            <td  style="border: 1px solid #aaa; color: cornsilk; font-weight: 600; font-size:large; text-align: center; padding: 5px;">{{location.loc_id}}</td>
+            <td  style="border: 1px solid #aaa; color: cornsilk; font-weight: 600; font-size:large; text-align: center; padding: 5px;">
                 <a href="/updatel/{{location.loc_id}}">Update</a>
                 <br>
                 <a href="/deletel/{{location.loc_id}}">Delete</a>
@@ -32,17 +41,7 @@
     </table>
     {% endif %}
     <br>
-    <div class="form" style=" margin-top: 20px;">
-    <form action='/location' method="POST">
-        <input type="text" name="location" id="location" style="width: 70%;">
-        <input type="submit" value="Add Location">
-        
-    </form>
-    <br>
-    <form action="/" >
-        <input type="submit" value="Back">
-    </form>
-</div>
+   
 
 </div>
 {% endblock%}

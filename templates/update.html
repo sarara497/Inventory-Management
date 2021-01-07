@@ -8,20 +8,18 @@
 {% endblock%}
 
 {% block body %}
-<div class='div_content' style="width:400px; margin: 0 auto;">
+<div class='div_content' style="width:400px; margin: 0 auto; margin-top: 150px; border: double;background-color: #202548; padding: 44px; ">
     <br>
     
-    <h1 style="text-align: center"> UpDate Product </h1>
-    <br>
-    <div class="form" style=" margin-top: 20px;">
-    <form action='/update/{{product.prod_id}}' method="POST">
-        <input type="text" name="product" id="product" value="{{product.prod_id}}" style="width: 70%;">
-        <input type="submit" value="UpDate">
+    <h1  style="text-align: center;  color: cornsilk; font-size:xx-large; margin-top: -10px;"> Update Product </h1>
+    <div class="form" style=" margin-top: 30px; text-align: center;">
+    <form action='/update/{{product.prod_id}}' method="POST" style=" display: flex; flex-direction: row;">
+        <input type="text" name="product" id="product" value="{{product.prod_id}}" style="text-align: center; margin-left: 10px; width: 90%; margin-bottom: 17px; height: 40px;border: double; font-weight: 600; font-size: large; color:#202548; border-block-color: revert; margin-right: 10px;">
+        <input type="submit" value="UpDate" style=" font-size: 25px; background-color: #49528e; border: double; color: floralwhite; width:40%; height: 45px; margin-right: 10px;">
 
     </form>
-    <br>
     <form action="/product" >
-        <input type="submit" value="Back">
+        <input type="submit" value="Back" style="margin-bottom: 40px; font-size: 25px; background-color: #49528e; border: double; color: floralwhite; width:40%; height: 45px;">
     </form>
 </div>
 

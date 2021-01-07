@@ -8,23 +8,31 @@
 {% endblock%}
 
 {% block body %}
-<div class='div_content' style="width:400px; margin: 0 auto;">
-    <br>
-    <h1 style="text-align: center">Product Table </h1>
+
+<div class='div_content' style="width:600px; margin: 0 auto; display: flex; flex-direction: column;">
+    <div class="form" style=" margin-top: 30px; text-align: center;">
+       <form action='/product' method="POST" style=" display: flex; flex-direction: row;">
+         <input type="text" name="product" id="product" style=" margin-left: 10px; width: 90%; margin-bottom: 17px; height: 40px;border: double; font-weight: 600; font-size: large; color: blue; border-block-color: revert; margin-right: 10px;">  
+           <input type="submit" value="Add Product" style=" font-size: 25px; background-color: #828ede; border: double; color: floralwhite; width:40%; height: 45px; margin-right: 10px;">  
+        </form>
+        <form action="/" >
+            <input type="submit" value="Back" style="margin-bottom: 40px; font-size: 25px; background-color: #828ede; border: double; color: floralwhite; width:40%; height: 45px;">
+        </form>
+       </div>
+    <h1 style="text-align: center ; color: cornsilk; font-size:xx-large; margin-top: -10px;" >Product Table </h1>
     {% if products|length < 1 %}
-    <h4 style="text-align: center">There are no Products ! Add One.   </h4>
-     
+    <h4 style="text-align: center ; color: cornsilk; font-size:x-large; margin-top: -10px;">There are no Products ! Add One.   </h4>
     {% else %}
-    <table style="border: 1px solid #aaa; border-collapse: collapse; width: 100%;">
+    <table style=" border: 1px solid #aaa; border-collapse: collapse; width: 100%;">
         <tr>
-            <th  style="border: 1px solid #aaa; height: 30px;">Product</th>
-            <th  style="border: 1px solid #aaa; height: 30px;">Actions</th>
+            <th  style="border: 1px solid #aaa; height: 30px; color: cornsilk; font-size:x-large;">Product</th>
+            <th  style="border: 1px solid #aaa; height: 30px; color: cornsilk; font-size:x-large;">Actions</th>
         </tr>
         {% for product in products %}
         <!-- <h6>{{ product.prod_id }}</h6> -->
         <tr>
-            <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">{{product.prod_id}}</td>
-            <td  style="border: 1px solid #aaa;  text-align: center; padding: 5px;">
+            <td  style="border: 1px solid #aaa; color: cornsilk; font-weight: 600; font-size:large; text-align: center; padding: 5px;">{{product.prod_id}}</td>
+            <td  style="border: 1px solid #aaa;  color: cornsilk; font-weight: 600; font-size:large; text-align: center; padding: 5px;">
                 <a href="/update/{{product.prod_id}}">Update</a>
                 <br>
                 <a href="/delete/{{product.prod_id}}">Delete</a>
@@ -34,17 +42,7 @@
     </table>
     {% endif %}
     <br>
-    <div class="form" style=" margin-top: 20px;">
-    <form action='/product' method="POST">
-        <input type="text" name="product" id="product" style="width: 70%;">
-        <input type="submit" value="Add Product">
-
-    </form>
-    <br>
-    <form action="/" >
-        <input type="submit" value="Back">
-    </form>
-</div>
+    
 
 </div>
 {% endblock%}
