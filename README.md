@@ -3,6 +3,7 @@
 
 <br><br>
 <p align="center"><img src="https://imgur.com/a/zsdC571" width="100%"><p>
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/zsdC571" data-context="false" ><a href="//imgur.com/a/zsdC571"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
 ## TechStack
 - Flask
