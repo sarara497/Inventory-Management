@@ -21,7 +21,7 @@
 ## Setup
 ``` 
 git clone https://github.com/sarara497/Inventory-Management
-cd Flaskex
+cd Inventory-Management
 pip install -r requirements.txt
 python app.py
 ```
