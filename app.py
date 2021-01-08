@@ -176,7 +176,7 @@ def updateMovement(id):
     if request.method == 'POST':
         update_Move.from_location = request.form['from']
         update_Move.to_location=request.form['to']
-        update_Move.qty=request.form['pro_id']
+        update_Move.qty=request.form['pro_qty']
         update_Move.product_id=request.form['pro_id']
 
         try:
@@ -188,17 +188,17 @@ def updateMovement(id):
     else:
         return render_template('update_Movement.html', productm =  update_Move)
 
-# @app.route('/deleteM')
-# def deleteM():
-#     id='3'
-#     del_location = ProductMovement.query.get_or_404(id)
+@app.route('/deleteM')
+def deleteM():
+    id='5'
+    del_location = ProductMovement.query.get_or_404(id)
 
-#     try:
-#         db.session.delete(del_location)
-#         db.session.commit()
-#         return redirect('/proMovement')
-#     except:
-#         return 'There was a problem deleting that location'
+    try:
+        db.session.delete(del_location)
+        db.session.commit()
+        return redirect('/proMovement')
+    except:
+        return 'There was a problem deleting that location'
 
 
 
@@ -208,18 +208,33 @@ def ProductB():
     if request.method == 'POST':
       prodMov =ProductMovement.query.order_by(ProductMovement.timestamp.desc()).all()
       loc = Location.query.all()
-      result={}
-      
-      for y in loc:
-           myarray=[] 
-           for x in prodMov:
-             #print('pro ->>>>' , x.to_location , x.product_id , x.qty)
-             if y.loc_id == x.to_location:
-                 result[x.to_location]=myarray
-                 v={'product':x.product_id , 'Location':x.to_location , "Qty":x.qty}
-                 myarray.append(v)
+      prod= Product.query.all()
+      prodResult={}
+      for p in prod:
+          productArray=[]
+          for pm in prodMov:
+              if p.prod_id == pm.product_id :
+                  print('proresult' , p.prod_id )
+                  if p.prod_id in prodResult:
+                      print('iam here ' , p.prod_id )
+                      break
+                  else:
+                      prodResult[p.prod_id ]=productArray
+                      v={'product':pm.product_id , 'Location':pm.to_location , "Qty":pm.qty}
+                      productArray.append(v)
+      print('proresult11111111' , prodResult )
+    #   result={}
+    #   print('locatiion---->'  , prodMov)
+    #   for y in loc:
+    #        myarray=[] 
+    #        for x in prodMov:
+    #          #print('pro ->>>>' , x.to_location , x.product_id , x.qty)
+    #          if y.loc_id == x.to_location:
+    #              result[x.to_location]=myarray
+    #              v={'product':x.product_id , 'Location':x.to_location , "Qty":x.qty}
+    #              myarray.append(v)
                 
-      print("v = " ,result)
+    #   print("v = " ,result)
     #   finalResult={}
     #   for y in loc:
     #       mynewarray=[]
@@ -236,7 +251,7 @@ def ProductB():
                       
     #       print("the final = " , finalResult)         
 
-      return render_template('balancePro.html' , balanc = result)
+      return render_template('balancePro.html' , balanc = prodResult)
 
     else :
         return 'There was a problem '
