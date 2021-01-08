@@ -149,20 +149,15 @@ def updatel(id):
 @app.route('/proMovement' , methods=['POST' , 'GET'])
 def proMovement():
     if request.method == 'POST':
-        print("here ------>" , request.form )
         new_proMovement = ProductMovement(from_location= request.form['from'] , to_location=request.form['to'] ,qty=request.form['pro_qty'] ,product_id=request.form['pro_id']  )
-        print("here3333 ------>" ,  new_proMovement.from_location )
             #push the new Product-Movement obj to the database 
         try:
-          print("here2 ------>" , new_proMovement.from_location)
           db.session.add(new_proMovement)
           db.session.commit()
           return redirect('/proMovement')
-        except Exception as e:
-            print("Failed to add book")
+        except :
             return 'error in your Added'
-            # print('eeeeeeee' , e)
-            # return ('eeeeeeee')
+   
     else:
         #return all the Product-Movements
         productsmove = ProductMovement.query.all()
@@ -188,17 +183,17 @@ def updateMovement(id):
     else:
         return render_template('update_Movement.html', productm =  update_Move)
 
-@app.route('/deleteM')
-def deleteM():
-    id='5'
-    del_location = ProductMovement.query.get_or_404(id)
+# @app.route('/deleteM')
+# def deleteM():
+#     id='5'
+#     del_location = ProductMovement.query.get_or_404(id)
 
-    try:
-        db.session.delete(del_location)
-        db.session.commit()
-        return redirect('/proMovement')
-    except:
-        return 'There was a problem deleting that location'
+#     try:
+#         db.session.delete(del_location)
+#         db.session.commit()
+#         return redirect('/proMovement')
+#     except:
+#         return 'There was a problem deleting that location'
 
 
 
@@ -221,35 +216,7 @@ def ProductB():
                   else:
                       prodResult[p.prod_id ]=productArray
                       v={'product':pm.product_id , 'Location':pm.to_location , "Qty":pm.qty}
-                      productArray.append(v)
-      print('proresult11111111' , prodResult )
-    #   result={}
-    #   print('locatiion---->'  , prodMov)
-    #   for y in loc:
-    #        myarray=[] 
-    #        for x in prodMov:
-    #          #print('pro ->>>>' , x.to_location , x.product_id , x.qty)
-    #          if y.loc_id == x.to_location:
-    #              result[x.to_location]=myarray
-    #              v={'product':x.product_id , 'Location':x.to_location , "Qty":x.qty}
-    #              myarray.append(v)
-                
-    #   print("v = " ,result)
-    #   finalResult={}
-    #   for y in loc:
-    #       mynewarray=[]
-    #       for x , z in result.items():
-    #           finalResult[x]=mynewarray
-    #           print("x= ",x , "y" ,z)
-    #           value=z[0]['product']
-    #           if y.loc_id == x:
-                  
-    #               for i in range(len(z)):
-                      
-    #                   if z[i]['product'] == value:
-    #                       mynewarray.append(z[i])
-                      
-    #       print("the final = " , finalResult)         
+                      productArray.append(v)           
 
       return render_template('balancePro.html' , balanc = prodResult)
 
