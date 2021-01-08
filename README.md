@@ -2,6 +2,8 @@
 <p align="center"><img src="https://raw.githubusercontent.com/anfederico/Flaskex/master/media/flaskex-logo.png" width="128px"><p>
 
 <br><br>
+<p align="center"><img src="https://ibb.co/wWnvvyq" width="100%"><p>
+
 ## TechStack
 - Flask
 - SQLAlchemy
