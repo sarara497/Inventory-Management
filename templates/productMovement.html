@@ -9,54 +9,82 @@
 
 {% block body %}
 <div class='div_content' style="width:600px; margin: 0 auto; display: flex; flex-direction: column;">
-    
-    
+
+
     <h1 style="text-align: center ; color: cornsilk; font-size:xx-large; margin-top: 20px;">Product-Movement Table </h1>
-    {% if productsmove|length < 1 %}
-    <h4 style="text-align: center ; color: cornsilk; font-size:x-large; margin-top: -10px;">There are no Products-Movement ! Add One. </h4>
-    {% else %}
     <div class="form" style=" margin-top: 10px; text-align: center;">
-        <form action='/proMovement' method="POST" >
-            <input type="text" name="from" id="from" placeholder="fromLocation.." style=" margin-left: 10px; width: 55%; margin-bottom: 17px; height: 40px;border: double; font-weight: 600; font-size: large; color: blue; border-block-color: revert; margin-right: 10px;">
-            <input type="text" name="to" id="to" placeholder="ToLocation..." style=" margin-left: 10px; width: 55%; margin-bottom: 17px; height: 40px;border: double; font-weight: 600; font-size: large; color: blue; border-block-color: revert; margin-right: 10px;">
-            <input type="text" name="pro_qty" placeholder="Product Qty..." id="pro_qty" style=" margin-left: 10px; width: 55%; margin-bottom: 17px; height: 40px;border: double; font-weight: 600; font-size: large; color: blue; border-block-color: revert; margin-right: 10px;">
-            <input type="text" name="pro_id" placeholder="ProductId..." id="pro_id" style=" margin-left: 10px; width: 55%; margin-bottom: 17px; height: 40px;border: double; font-weight: 600; font-size: large; color: blue; border-block-color: revert; margin-right: 10px;">
+        <form action='/proMovement' method="POST">
+            <input type="text" name="from" id="from" placeholder="fromLocation.."
+                style=" margin-left: 10px; width: 55%; margin-bottom: 17px; height: 40px;border: double; font-weight: 600; font-size: large; color: blue; border-block-color: revert; margin-right: 10px;">
+            <input type="text" name="to" id="to" placeholder="ToLocation..."
+                style=" margin-left: 10px; width: 55%; margin-bottom: 17px; height: 40px;border: double; font-weight: 600; font-size: large; color: blue; border-block-color: revert; margin-right: 10px;">
+            <input type="text" name="pro_qty" placeholder="Product Qty..." id="pro_qty"
+                style=" margin-left: 10px; width: 55%; margin-bottom: 17px; height: 40px;border: double; font-weight: 600; font-size: large; color: blue; border-block-color: revert; margin-right: 10px;">
+            <input type="text" name="pro_id" placeholder="ProductId..." id="pro_id"
+                style=" margin-left: 10px; width: 55%; margin-bottom: 17px; height: 40px;border: double; font-weight: 600; font-size: large; color: blue; border-block-color: revert; margin-right: 10px;">
             <input type="submit" value="Add P Movement" style=" font-size: 25px; background-color: #828ede; border: double; color: floralwhite; width:40%; height: 45px;">
         </form><br>
-        <form action="/" >
-            <input type="submit" value="Back" style="margin-bottom: 40px; font-size: 25px; background-color: #828ede; border: double; color: floralwhite; width:40%; height: 45px;">
+        <form action="/">
+            <input type="submit" value="Back"
+                style="margin-bottom: 40px; font-size: 25px; background-color: #828ede; border: double; color: floralwhite; width:40%; height: 45px;">
+
         </form>
     </div>
-    <table style="border: 1px solid #aaa; border-collapse: collapse; width: 100%; align-self: center;">
-        <tr>
-            <th   style=" padding: 10px; border: 1px solid #aaa; height: 30px; color: cornsilk; font-size:x-large;">Move-id</th>
-            <th   style=" padding: 10px;border: 1px solid #aaa; height: 30px; color: cornsilk; font-size:x-large;">Time</th>
-            <th   style=" padding: 10px; border: 1px solid #aaa; height: 30px; color: cornsilk; font-size:x-large;">From</th>
-            <th   style=" padding: 10px;border: 1px solid #aaa; height: 30px; color: cornsilk; font-size:x-large;">To</th>
-            <th   style=" padding: 10px;border: 1px solid #aaa; height: 30px; color: cornsilk; font-size:x-large;">Product-id</th>
-            <th   style=" padding: 10px;border: 1px solid #aaa; height: 30px; color: cornsilk; font-size:x-large;">Qty</th>
-            <th   style= "padding: 10px;border: 1px solid #aaa; height: 30px; color: cornsilk; font-size:x-large;">Action</th>
-        </tr>
-        {% for productm in productsmove %}
-        <!-- <h6>{{ productm.to_location}}</h6> -->
-        <tr>
-            <td style="border: 1px solid #aaa; color: cornsilk; font-weight: 600; font-size:large; text-align: center; padding: 15px;">{{productm.id}}</td>
-            <td style="border: 1px solid #aaa; color: cornsilk; font-weight: 600; font-size:large; text-align: center; padding: 15px;">{{productm.timestamp}}</td>
-            <td style="border: 1px solid #aaa; color: cornsilk; font-weight: 600; font-size:large; text-align: center; padding: 15px;">{{productm.from_location}}</td>
-            <td style="border: 1px solid #aaa; color: cornsilk; font-weight: 600; font-size:large; text-align: center; padding: 15px;">{{productm.to_location}}</td>
-            <td style="border: 1px solid #aaa; color: cornsilk; font-weight: 600; font-size:large; text-align: center; padding: 15px;">{{productm.product_id}}</td>
-            <td style="border: 1px solid #aaa; color: cornsilk; font-weight: 600; font-size:large; text-align: center; padding: 15px;">{{productm.qty}}</td>
-            <td style="border: 1px solid #aaa; color: cornsilk; font-weight: 600; font-size:large; text-align: center; padding: 15px;">
-                <a href="/updateMovement/{{productm.id}}">Update</a>
-                <!-- <br>
-                <a href="/deleteM">Delete</a> -->
-            </td>
-        </tr>
-        {% endfor%}
-    </table>
-    {% endif %}
-    <br>
- 
+    {% if productsmove|length < 1 %} <h4
+        style="text-align: center ; color: cornsilk; font-size:large; margin-top: -10px;">There are no Products-Movement
+        ! Add One. </h4>
+        {% else %}
+
+        <table style="border: 1px solid #aaa; border-collapse: collapse; width: 100%; align-self: center;">
+            <tr>
+                <th style=" padding: 10px; border: 1px solid #aaa; height: 30px; color: cornsilk; font-size:x-large;">
+                    Move-id</th>
+                <th style=" padding: 10px;border: 1px solid #aaa; height: 30px; color: cornsilk; font-size:x-large;">
+                    Time</th>
+                <th style=" padding: 10px; border: 1px solid #aaa; height: 30px; color: cornsilk; font-size:x-large;">
+                    From</th>
+                <th style=" padding: 10px;border: 1px solid #aaa; height: 30px; color: cornsilk; font-size:x-large;">To
+                </th>
+                <th style=" padding: 10px;border: 1px solid #aaa; height: 30px; color: cornsilk; font-size:x-large;">
+                    Product-id</th>
+                <th style=" padding: 10px;border: 1px solid #aaa; height: 30px; color: cornsilk; font-size:x-large;">Qty
+                </th>
+                <th style="padding: 10px;border: 1px solid #aaa; height: 30px; color: cornsilk; font-size:x-large;">
+                    Action</th>
+            </tr>
+            {% for productm in productsmove %}
+            <!-- <h6>{{ productm.to_location}}</h6> -->
+            <tr>
+                <td
+                    style="border: 1px solid #aaa; color: cornsilk; font-weight: 600; font-size:large; text-align: center; padding: 15px;">
+                    {{productm.id}}</td>
+                <td
+                    style="border: 1px solid #aaa; color: cornsilk; font-weight: 600; font-size:large; text-align: center; padding: 15px;">
+                    {{productm.timestamp}}</td>
+                <td
+                    style="border: 1px solid #aaa; color: cornsilk; font-weight: 600; font-size:large; text-align: center; padding: 15px;">
+                    {{productm.from_location}}</td>
+                <td
+                    style="border: 1px solid #aaa; color: cornsilk; font-weight: 600; font-size:large; text-align: center; padding: 15px;">
+                    {{productm.to_location}}</td>
+                <td
+                    style="border: 1px solid #aaa; color: cornsilk; font-weight: 600; font-size:large; text-align: center; padding: 15px;">
+                    {{productm.product_id}}</td>
+                <td
+                    style="border: 1px solid #aaa; color: cornsilk; font-weight: 600; font-size:large; text-align: center; padding: 15px;">
+                    {{productm.qty}}</td>
+                <td
+                    style="border: 1px solid #aaa; color: cornsilk; font-weight: 600; font-size:large; text-align: center; padding: 15px;">
+                    <a href="/updateMovement/{{productm.id}}">Update</a>
+                    <br>
+                    <a href="/deleteM">Delete</a>
+                </td>
+            </tr>
+            {% endfor%}
+        </table>
+        {% endif %}
+        <br>
+
 
 </div>
 {% endblock%}

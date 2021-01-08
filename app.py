@@ -22,7 +22,7 @@ class Location(db.Model):
 
 class ProductMovement(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    timestamp=db.Column(db.DateTime , default=datetime.utcnow.__format__)
+    timestamp=db.Column(db.DateTime , default=datetime.utcnow)
    
     from_location=db.Column( db.String(200), db.ForeignKey(Location.loc_id),nullable=True)
     to_location=db.Column( db.String(200), db.ForeignKey(Location.loc_id),nullable=True)
@@ -149,14 +149,20 @@ def updatel(id):
 @app.route('/proMovement' , methods=['POST' , 'GET'])
 def proMovement():
     if request.method == 'POST':
+        print("here ------>" , request.form )
         new_proMovement = ProductMovement(from_location= request.form['from'] , to_location=request.form['to'] ,qty=request.form['pro_qty'] ,product_id=request.form['pro_id']  )
+        print("here3333 ------>" ,  new_proMovement.from_location )
             #push the new Product-Movement obj to the database 
         try:
+          print("here2 ------>" , new_proMovement.from_location)
           db.session.add(new_proMovement)
           db.session.commit()
           return redirect('/proMovement')
-        except:
-              return 'there was a problem in your added'
+        except Exception as e:
+            print("Failed to add book")
+            return 'error in your Added'
+            # print('eeeeeeee' , e)
+            # return ('eeeeeeee')
     else:
         #return all the Product-Movements
         productsmove = ProductMovement.query.all()
@@ -184,7 +190,7 @@ def updateMovement(id):
 
 # @app.route('/deleteM')
 # def deleteM():
-#     id='7'
+#     id='3'
 #     del_location = ProductMovement.query.get_or_404(id)
 
 #     try:
