@@ -2,8 +2,8 @@
 <p align="center"><img src="https://raw.githubusercontent.com/anfederico/Flaskex/master/media/flaskex-logo.png" width="128px"><p>
 
 <br><br>
-<p align="center"><img src="https://imgur.com/a/zsdC571" width="100%"><p>
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/zsdC571" data-context="false" ><a href="//imgur.com/a/zsdC571"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+<p align="center"><img src="https://user-images.githubusercontent.com/71350975/104065891-2b536100-5209-11eb-97f4-1aa441709346.png" width="100%"><p>
+
 
 ## TechStack
 - Flask
